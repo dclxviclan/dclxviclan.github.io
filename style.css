@@ -1,0 +1,35 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: 'black';
+}
+
+#canvas1 {
+	border: 5px solid black;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: 'black';
+	max-width: 100%;
+	max-height: 100%;
+	font-family: 'Bangers', cursive;
+}
+
+#layer1, #layer2, #layer3, #layer4, #player, #angler1, #angler2, #lucky, #projectile, #gears {
+	display: none;
+}
+
+#layer5 {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;f
+	fixed;
+	
+	max-height: 100%;
+	max-width: 100%;
+	
+	top: 50%;
+	left: 50%;
+}
