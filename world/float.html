@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+  <meta charset="UTF-8">
+  <title>Земля и Луна</title>
+  <!-- подключаем свои стили -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+	<!-- подключаем LUME -->
+	<script src="https://unpkg.com/lume@0.3.0-alpha.11/dist/global.js"></script>
+
+	<!-- по умолчанию сцена занимает всё доступное место, в нашем случае — весь раздел body -->
+	<lume-scene id="scene" webgl >
+		<!-- настраиваем положение камеры на старте и в общем -->
+		<lume-camera-rig align-point="0.5 0.5 0.5" initial-polar-angle="0" min-distance="90" max-distance="1000" initial-distance="500"></lume-camera-rig>
+
+		<!-- заполняем пространство звёздами -->
+		<lume-sphere id="stars" texture="https://assets.codepen.io/191583/galaxy_starfield.png" receive-shadow="true" has="basic-material" sidedness="back" size="4000 4000 4000" align-point="0.5 0.5 0.5" mount-point="0.5 0.5 0.5" color="green"></lume-sphere>
+
+		<!-- добавляем свет от солнца -->
+		<!-- настраиваем направление света -->
+		<lume-node align-point="0.5 0.5" size="2 0" rotation="0 -50 0">
+			<lume-node align-point="0.5 0.5" size="2 0" rotation="10 0 0">
+				<!-- добавляем источник света -->
+				<lume-point-light id="light" size="0 0" position="0 0 1800" color="silver" intensity="2" distance="10000" shadow-map-width="2048" shadow-map-height="2048" shadow-camera-far="20000"></lume-point-light>
+			</lume-node>
+		</lume-node>
+
+		<!-- Рисуем Землю -->
+		<lume-node align-point="0.5 0.5" size="15 15 15">
+
+			<!-- включаем вращение Земли -->
+			<lume-node rotation="0 180 0">
+				<!-- Земля — это шар, поэтому рисуем шар и натягиваем на него текстуры: изображение Земли, карту глубины и карту отражений-->
+				<lume-sphere id="earth" 
+					texture="https://assets.codepen.io/191583/earthmap1k.jpg" 
+					bump-map="https://assets.codepen.io/191583/earthbump1k.jpg" 
+					specular-map="https://assets.codepen.io/191583/earthspec1k.jpg" 
+					size="150 150 150" mount-point="0.5 0.5 0.5" align-point="0.5 0.5" color="white">
+
+					<!-- добавляем облака -->
+					<lume-sphere id="clouds" texture="https://assets.codepen.io/191583/earthclouds.png" opacity="0.7" size="125 125 125" align-point="0.5 0.5 0.5" mount-point="0.5 0.5 0.5" color="white"></lume-sphere>
+				</lume-sphere>
+			</lume-node>
+
+			<!-- рисуем Луну -->
+			<lume-node align-point="0.5 0.5" rotation="90 10 0">
+				<!-- указываем, как ей вращаться вокруг Земли -->
+				<lume-node id="moonRotator" align-point="0.5 0.5" rotation="0 0 110">
+					<!-- рисуем круг и добавляем на него текстуру -->
+					<lume-sphere texture="https://assets.codepen.io/191583/moon.jpg" position="350" size="25 25 25" mount-point="0.5 0.5 0.5" color="white"></lume-sphere>
+				</lume-node>
+			</lume-node>
+
+		</lume-node>
+	</lume-scene>
+
+	<!-- подключаем наш скрипт -->
+	<script  src="script.js"></script>
+
+</body>
+</html>
