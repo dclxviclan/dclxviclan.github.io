@@ -1,0 +1,149 @@
+ DCLXVICLAN
+<!--
+LUME ✨👉 https://github.com/lume/lume
+Old Version. See v2: https://codepen.io/trusktr/pen/wvzjgbo
+-->
+<style>
+  html,
+  body {
+    width: 100%;
+    height: 95%;
+    margin: 0;
+    padding: 0;
+    background: #1218;
+	background-image:url("../8c8rrQmmK88.jpg")
+  }
+</style>
+
+<lume-scene id="scene" perspective="200" webgl="true">
+  <lume-point-light position="200 -200 200" id="light2" intensity="7" color="black"></lume-point-light>
+  <lume-ambient-light id="light1" color="green" intensity="4"></lume-ambient-light>
+  <lume-perspective-camera id="cam" size="0 1 0" position="0 0 1300" rotation="0 0 1.5" active></lume-perspective-camera>
+
+  <lume-gltf-model src="https://rawcdn.githack.com/KhronosGroup/glTF-Sample-Models/8e9a5a6ad1a2790e2333e3eb48a1ee39f9e0e31b/2.0/VC/glTF-Binary/VC.glb" rotation="0 -180 0" size="1 1 1" id="model" scale="400 400 400"></lume-gltf-model>
+  <lume-gltf-model src="https://rawcdn.githack.com/KhronosGroup/glTF-Sample-Models/8e9a5a6ad1a2790e2333e3eb48a1ee39f9e0e31b/2.0/CesiumMilkTruck/glTF-Binary/CesiumMilkTruck.glb" rotation="0 160 0" size="1 1 1" id="model1" scale="15 15 15"></lume-gltf-model>
+  <lume-gltf-model src="https://rawcdn.githack.com/KhronosGroup/glTF-Sample-Models/8e9a5a6ad1a2790e2333e3eb48a1ee39f9e0e31b/2.0/RiggedFigure/glTF-Binary/RiggedFigure.glb" rotation="0 160 0" size="20 20 20" id="model2" scale="35 35 35"></lume-gltf-model>
+  <lume-gltf-model src="https://rawcdn.githack.com/KhronosGroup/glTF-Sample-Models/8e9a5a6ad1a2790e2333e3eb48a1ee39f9e0e31b/2.0/BrainStem/glTF-Binary/BrainStem.glb" rotation="0 160 0" size="20 20 20" id="model3" scale="35 35 35"></lume-gltf-model>
+  <lume-gltf-model src="./scene.gltf"rotation="0 160 0" size="20 20 20" id="model4" scale="35 35 35"></lume-gltf-model>
+
+</lume-scene>
+
+<script src="https://unpkg.com/lume@0.3.0-alpha.14/dist/global.js"></script>
+<script>
+  var isMove = "false";
+  LUME.useDefaultNames()
+  model.position = (x, y, z) => [x,y, 1000]
+  model1.position = (x, y, z) => [120,y, -430]
+  model1.rotation = (x, y, z) => [x, y , z]
+  cam.position = (x, y, z) => [model1.position.x + 50, model1.position.y - 50, model1.position.z + 140]
+  cam.rotation = (x, y, z) => [x, y, z]
+  
+  
+  model4.position = (x, y, z) => [x,y,5 - z]
+  
+  
+  if (model1.rotation.y  > -98) {
+	model1.position = (x, y, z) => [x + Math.random(15, 10),y,Math.random(55,35) + z]
+	cam.position = (x, y, z) => [model1.position.x + 45, model1.position.y - 55, model1.position.z + 150]
+  }
+  else {
+	model1.position = (x, y, z) => [x + Math.random(-15, -10),y,Math.random(-55, -35) + z]
+	cam.position = (x, y, z) => [model1.position.x + 55, model1.position.y - 55, model1.position.z + 150]
+  }
+  
+  
+	
+	
+	
+
+  
+  
+
+  
+this.keys = [ ];
+document.addEventListener('touchstart', e => {
+	this.touchY = e.changedTouches[0].pageY
+	this.touchX = e.changedTouches[0].pageX
+});
+document.addEventListener('touchmove', e => {
+	const swipeDistance = e.changedTouches[0].pageY - this.touchY;
+	const swipeDistances = e.changedTouches[0].pageX - this.touchX;
+	if (swipeDistance < -this.touchTreshold && this.keys.indexOf('swipe up') === -1) this.keys.push('swipe up');
+	else if (swipeDistance > this.touchTreshold && this.keys.indexOf('swipe down') === -1) {
+		this.keys.push('swipe down');
+		if (gameOver) restartGame();
+	}
+	if (swipeDistances < -this.touchTreshold && this.keys.indexOf('swipe right') === -1) this.keys.push('swipe right');
+		else if (swipeDistances > this.touchTreshold && this.keys.indexOf('swipe left') === -1) {1
+		this.keys.push('swipe left');
+					//if (gameOver) restartGame();
+	}
+});
+document.addEventListener('touchend', e => {
+	this.keys.splice(this.keys.indexOf('swipe up'), 1);
+	this.keys.splice(this.keys.indexOf('swipe down'), 1);
+});
+document.addEventListener('pointermove', event => { 			
+	event.preventDefault() 			
+	model2.rotation = (x, y, z) => [x,y + 2, z]
+   model3.rotation = (x, y, z) => [x,y + 27, z]
+	model2.position = (x, y, z) => [x + 2,-10, -555]
+   model3.position = (x, y, z) => [x - 2,-10, -365]
+	model.rotation = (x, y, z) => [x,y - 0.07, z]
+	cam.position = (x, y, z) => [model1.position.x + 15, model1.position.y - 55, model1.position.z + 150]
+	if (model1.rotation.y  > -98) {
+	model1.position = (x, y, z) => [8 +x,y,-400]
+	cam.position = (x, y, z) => [model1.position.x + 15, model1.position.y - 55, model1.position.z + 150]
+	
+   }
+   else {
+	model1.position = (x, y, z) => [-8 +x,y,-400]
+	cam.position = (x, y, z) => [model1.position.x + 15, model1.position.y - 55, model1.position.z + 150]
+	
+   }
+
+	
+})
+document.addEventListener('pointerdown', event => { 			
+	event.preventDefault() 			
+	var isMove = "true";
+	cam.position = (x, y, z) => [model1.position.x + 15, model1.position.y - 55, model1.position.z + 150]
+	light1.color = "black"
+	light2.color = "blue"
+	model.rotation = (x, y, z) => [x,y + 0.17, z]
+	if (model1.rotation.y < (0, 98,0)) {
+		
+		model1.rotation = (x, y, z) => [x,98, z]
+	} else {
+		model1.rotation = (x, y, z) => [x,-98, z]
+		
+	} 
+})
+document.addEventListener('pointerup', event => { 			
+	event.preventDefault() 	
+	light1.color = "black"
+	light2.color = "black"
+	model1.position = (x, y, z) => [x,0,z]
+	var isMove = "false";
+	model.rotation = (x, y, z) => [x,y + 0.01, z]
+	model.position = (x, y, z) => [x,y, z]
+	model2.rotation = (x, y, z) => [x,y, z]
+   model3.rotation = (x, y, z) => [x,y, z]
+	model2.position = (x, y, z) => [x ,-10, -555]
+   model3.position = (x, y, z) => [x,-10, -365]
+   cam.position = (x, y, z) => [model1.position.x + 15, model1.position.y - 50, model1.position.z + 150]
+})
+if (keys.indexOf('swipe left') > -1 ){
+	  model1.position = (x, y, z) => [x, 2 + y , z]
+} else if (keys.indexOf('swipe right') > -1 ){
+	this.speed = -10;
+}  else if (keys.indexOf('swipe up') > -1){
+this.vy -= 32;
+}  else {
+	thi;
+}
+  
+</script>
+
+DCLXVICLAN
+Resources
